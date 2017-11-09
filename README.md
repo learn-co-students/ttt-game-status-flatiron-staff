@@ -91,7 +91,7 @@ for each win_combination in WIN_COMBINATIONS
 end
 ```
 
-That is a very verbose and explicit example of how you might iterate over a nested array of `WIN_COMBINATIONS` and checking each win combination index against the value of the board at that position.
+That is a very verbose and explicit example of how you might iterate over a nested array of `WIN_COMBINATIONS` and check each win combination index against the value of the board at that position.
 
 For example, on a board that has a winning combination in the top row, `#won?` should return `[0,1,2]`, the indexes in the board that created the win:
 
