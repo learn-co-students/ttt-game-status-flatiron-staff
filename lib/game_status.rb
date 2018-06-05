@@ -3,6 +3,8 @@ def position_taken?(board, index)
   !(board[index].nil? || board[index] == " ")
 end
 
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
 WIN_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -15,8 +17,10 @@ WIN_COMBINATIONS = [
 ]
 
 def won?(board)
-  WIN_COMBINATIONS.select do |win_combination|
-    win_index_1 = win_combination[0]
+
+
+  WIN_COMBINATIONS.select do |win_combination| #goes through each individua array in the nested array
+    win_index_1 = win_combination[0] # gives backthe numbers in the arrays
     win_index_2 = win_combination[1]
     win_index_3 = win_combination[2]
 
@@ -24,16 +28,43 @@ def won?(board)
     position_2 = board[win_index_2] # load the value of the board at win_index_2
     position_3 = board[win_index_3] # load the value of the board at win_index_3
 
-    if position_1 == "X" && position_2 == "X" && position_3 == "X"
+    if ("#{position_1}" == "X" && "#{position_2}" == "X" && "#{position_3}" == "X")
       return win_combination # return the win_combination indexes that won.
-    elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+    elsif ("#{position_1}" == "O" && "#{position_2}" == "O" && "#{position_3}" == "O")
       return win_combination
-    elsif board.each {|position| position == " "}
-      false
 
-    elsif board.each {|position| position != " "}
+    end
+  end
+end
+
+def full?(board)
+  board.detect do |place|
+    if "#{place}" == "X" || "#{place}" == "O"
+      return true
+    else
+      return false
+    end
+  end
+end
+
+def draw?(board)
+  board.each do |position|
+    if won?(board) == false && full?(board) == true
+      return true
+    else
       false
     end
   end
+end
 
+def over?(board)
+  if draw?(board)
+    true
+  elsif won?(board) && full?(board)
+    true
+  elsif won? && !full?
+    true
+  elsif !won? && !full?
+    false
+  end
 end
