@@ -17,9 +17,7 @@ WIN_COMBINATIONS = [
 ]
 
 def won?(board)
-
-
-  WIN_COMBINATIONS.select do |win_combination| #goes through each individua array in the nested array
+  WIN_COMBINATIONS.detect do |win_combination| #goes through each individual arrays in the nested array
     win_index_1 = win_combination[0] # gives backthe numbers in the arrays
     win_index_2 = win_combination[1]
     win_index_3 = win_combination[2]
@@ -37,24 +35,24 @@ def won?(board)
   end
 end
 
+
 def full?(board)
-  board.detect do |place|
-    if "#{place}" == "X" || "#{place}" == "O"
-      return true
-    else
+    if board.detect{|place| place == " "}
       return false
+    elsif board.each{|place| place == "X" || place == "O"}
+      return true
     end
-  end
 end
 
 def draw?(board)
-  board.each do |position|
-    if won?(board) == false && full?(board) == true
-      return true
-    else
-      false
-    end
-  end
+  # if board.each{|place| (place == "X" || place == "O") && !won?(board)}
+  #   return true
+  # elsif won?(board)
+  #   return false
+  # elsif board.detect{|place| place == " "}
+  #   return false
+  # end
+  full?(board) && !won?(board)
 end
 
 def over?(board)
@@ -64,7 +62,11 @@ def over?(board)
     true
   elsif won? && !full?
     true
-  elsif !won? && !full?
+  elsif !won?(board) && !full?(board)
     false
   end
+end
+
+def winner(board)
+
 end
