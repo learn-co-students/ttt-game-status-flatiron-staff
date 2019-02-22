@@ -4,3 +4,44 @@ def position_taken?(board, index)
 end
 
 # Define your WIN_COMBINATIONS constant
+WIN_COMBINATIONS = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+
+def won?(board)
+  win = false
+  WIN_COMBINATIONS.each do |combination|
+    symbols = combination.map {|cindex| board[cindex]}
+    if symbols.uniq.length == 1 && !symbols.include?(" ")
+      win = combination
+    end
+  end
+
+  win
+end
+
+def full?(board)
+  board.all? {|element| element != " "}
+end
+
+def draw?(board)
+  full?(board) && !won?(board)
+end
+
+def over?(board)
+  won?(board) || draw?(board)
+end
+
+def winner(board)
+  winner = won?(board)
+  if winner
+    board[winner[0]]
+  end
+end
