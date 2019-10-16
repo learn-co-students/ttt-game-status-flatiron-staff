@@ -34,7 +34,7 @@ def over?(board)
 end
 
 def winner(board)
-  return nil if draw?(board) || !over?(board)
+  return nil if !won?(board)
 
   winning_first_space = won?(board)[0]
   board[winning_first_space].strip
