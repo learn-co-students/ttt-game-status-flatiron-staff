@@ -18,9 +18,9 @@ WIN_COMBINATIONS = [
 
 def won?(board)
   WIN_COMBINATIONS.each do | combo |
-    if board[combo[0]] == board[combo[1]] && board[combo[1]] == board[combo[2]] && board[combo[0]] != " "
-      return combo
-    end
+  if board[combo[0]] == board[combo[1]] && board[combo[1]] == board[combo[2]] && board[combo[0]] != " "
+    return combo
+  end
   end
   false
 end
@@ -28,9 +28,9 @@ end
 
 def full?(board)
   board.detect do | position |
-    if position == " " || position == "" || position == nil
-      return false
-    end
+  if position == " " || position == "" || position == nil
+    return false
+  end
   end
   true
 end
@@ -56,9 +56,9 @@ end
 
 def winner(board)
   win_positions = won?(board)
-    if won?(board)
-      return board[win_positions[0]]
-    else
-      return nil
+  if won?(board)
+    return board[win_positions[0]]
+  else
+    return nil
   end
 end
